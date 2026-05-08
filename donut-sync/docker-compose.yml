@@ -1,0 +1,39 @@
+services:
+  donut-sync:
+    image: donut-sync-custom:latest
+    ports:
+      - "3929:3929"
+    environment:
+      - SYNC_TOKEN=12bc1b49d39bf33586f1ee9608a322368b076bb3bc50883bd404b7239aba8765
+      - PORT=3929
+      - S3_ENDPOINT=http://minio:9000
+      - S3_REGION=us-east-1
+      - S3_ACCESS_KEY_ID=minioadmin
+      - S3_SECRET_ACCESS_KEY=minioadmin
+      - S3_BUCKET=donut-sync
+      - S3_FORCE_PATH_STYLE=true
+    depends_on:
+      minio:
+        condition: service_healthy
+    restart: unless-stopped
+
+  minio:
+    image: minio/minio:latest
+    ports:
+      - "8987:9000"
+      - "8988:9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    command: server /data --console-address ":9001"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - minio_data:/data
+    restart: unless-stopped
+
+volumes:
+  minio_data:
