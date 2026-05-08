@@ -26,8 +26,7 @@ async fn get_locks_base_url(_app_handle: &tauri::AppHandle) -> String {
 /// Returns the Bearer token to use for profile-lock API calls.
 async fn get_locks_token(app_handle: &tauri::AppHandle) -> Result<String, String> {
   if CLOUD_AUTH.is_logged_in().await {
-    return CloudAuthManager::load_access_token()?
-      .ok_or_else(|| "Not logged in".to_string());
+    return CloudAuthManager::load_access_token()?.ok_or_else(|| "Not logged in".to_string());
   }
   SettingsManager::instance()
     .get_sync_token(app_handle)
@@ -140,15 +139,11 @@ impl ProfileLockManager {
     let client = Client::new();
 
     let (base_url, access_token) = if let Some(h) = self.resolve_app_handle().await {
-      (
-        get_locks_base_url(&h).await,
-        get_locks_token(&h).await?,
-      )
+      (get_locks_base_url(&h).await, get_locks_token(&h).await?)
     } else {
       (
         CLOUD_API_URL.to_string(),
-        CloudAuthManager::load_access_token()?
-          .ok_or_else(|| "Not logged in".to_string())?,
+        CloudAuthManager::load_access_token()?.ok_or_else(|| "Not logged in".to_string())?,
       )
     };
 
@@ -218,15 +213,11 @@ impl ProfileLockManager {
     let client = Client::new();
 
     let (base_url, access_token) = if let Some(h) = self.resolve_app_handle().await {
-      (
-        get_locks_base_url(&h).await,
-        get_locks_token(&h).await?,
-      )
+      (get_locks_base_url(&h).await, get_locks_token(&h).await?)
     } else {
       (
         CLOUD_API_URL.to_string(),
-        CloudAuthManager::load_access_token()?
-          .ok_or_else(|| "Not logged in".to_string())?,
+        CloudAuthManager::load_access_token()?.ok_or_else(|| "Not logged in".to_string())?,
       )
     };
 
@@ -276,15 +267,11 @@ impl ProfileLockManager {
     let client = Client::new();
 
     let (base_url, access_token) = if let Some(h) = self.resolve_app_handle().await {
-      (
-        get_locks_base_url(&h).await,
-        get_locks_token(&h).await?,
-      )
+      (get_locks_base_url(&h).await, get_locks_token(&h).await?)
     } else {
       (
         CLOUD_API_URL.to_string(),
-        CloudAuthManager::load_access_token()?
-          .ok_or_else(|| "Not logged in".to_string())?,
+        CloudAuthManager::load_access_token()?.ok_or_else(|| "Not logged in".to_string())?,
       )
     };
 
@@ -339,10 +326,7 @@ impl ProfileLockManager {
               .collect()
           } else {
             // Self-hosted: heartbeat all locks we hold
-            locks
-              .values()
-              .map(|l| l.profile_id.clone())
-              .collect()
+            locks.values().map(|l| l.profile_id.clone()).collect()
           }
         };
 
