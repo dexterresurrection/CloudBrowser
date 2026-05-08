@@ -1080,8 +1080,8 @@ impl CloudAuthManager {
       if let Some(auth_state) = CLOUD_AUTH.get_user().await {
         if auth_state.user.plan != "free" && !crate::team_lock::PROFILE_LOCK.is_connected().await {
           crate::team_lock::PROFILE_LOCK
-          .connect_with_handle(app_handle.clone())
-          .await;
+            .connect_with_handle(app_handle.clone())
+            .await;
         }
       }
 
@@ -1179,8 +1179,8 @@ pub async fn cloud_exchange_device_code(
   // Connect profile lock manager for paid users
   if state.user.plan != "free" {
     crate::team_lock::PROFILE_LOCK
-          .connect_with_handle(app_handle.clone())
-          .await;
+      .connect_with_handle(app_handle.clone())
+      .await;
   }
 
   let _ = crate::events::emit_empty("cloud-auth-changed");
