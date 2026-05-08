@@ -6,13 +6,15 @@ import {
   Param,
   Post,
   Req,
-  UnauthorizedException,
   UseGuards,
 } from "@nestjs/common";
 import type { Request } from "express";
 import { AuthGuard } from "../auth/auth.guard.js";
 import type { UserContext } from "../auth/user-context.interface.js";
-import type { AcquireLockResponseDto, ProfileLockInfo } from "./dto/profile-locks.dto.js";
+import type {
+  AcquireLockResponseDto,
+  ProfileLockInfo,
+} from "./dto/profile-locks.dto.js";
 import { ProfileLocksService } from "./profile-locks.service.js";
 
 /**

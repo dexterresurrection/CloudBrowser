@@ -80,6 +80,7 @@ import {
 } from "@/lib/browser-utils";
 import { formatRelativeTime } from "@/lib/flag-utils";
 import { trimName } from "@/lib/name-utils";
+import { showErrorToast, showSuccessToast } from "@/lib/toast-utils";
 import { cn } from "@/lib/utils";
 import type {
   BrowserProfile,
@@ -101,7 +102,6 @@ import { ProxyCheckButton } from "./proxy-check-button";
 import { TrafficDetailsDialog } from "./traffic-details-dialog";
 import { Input } from "./ui/input";
 import { RippleButton } from "./ui/ripple";
-import { showErrorToast, showSuccessToast } from "@/lib/toast-utils";
 
 // Stable table meta type to pass volatile state/handlers into TanStack Table without
 // causing column definitions to be recreated on every render.
@@ -209,7 +209,11 @@ interface TableMeta {
   // Personal proxy
   ppServers: { id: number; name: string; country: string; flag: string }[];
   loadPpServers: () => Promise<void>;
-  handleCreatePersonalProxy: (profileId: string, serverId: number, serverName: string) => Promise<void>;
+  handleCreatePersonalProxy: (
+    profileId: string,
+    serverId: number,
+    serverName: string,
+  ) => Promise<void>;
   // Team locks
   isProfileLockedByAnother: (profileId: string) => boolean;
   getProfileLockEmail: (profileId: string) => string | undefined;
@@ -1016,14 +1020,18 @@ export function ProfilesDataTable({
   const [countries, setCountries] = React.useState<LocationItem[]>([]);
   const [countriesLoaded, setCountriesLoaded] = React.useState(false);
   const canCreateLocationProxy = true;
-  const [ppServers, setPpServers] = React.useState<{id: number; name: string; country: string; flag: string}[]>([]);
+  const [ppServers, setPpServers] = React.useState<
+    { id: number; name: string; country: string; flag: string }[]
+  >([]);
   const [ppServersLoaded, setPpServersLoaded] = React.useState(false);
   const [ppCreating, setPpCreating] = React.useState(false);
 
   const loadPpServers = React.useCallback(async () => {
     if (ppServersLoaded) return;
     try {
-      const data = await invoke<{id: number; name: string; country: string; flag: string}[]>("personal_proxy_get_servers");
+      const data = await invoke<
+        { id: number; name: string; country: string; flag: string }[]
+      >("personal_proxy_get_servers");
       setPpServers(data);
       setPpServersLoaded(true);
     } catch (e) {
@@ -1036,7 +1044,9 @@ export function ProfilesDataTable({
       if (ppCreating) return;
       setPpCreating(true);
       try {
-        const sub = await invoke<{has_subscription: boolean}>("personal_proxy_check_subscription");
+        const sub = await invoke<{ has_subscription: boolean }>(
+          "personal_proxy_check_subscription",
+        );
         if (!sub.has_subscription) {
           showErrorToast("No active subscription for personal proxy");
           return;
@@ -1049,7 +1059,8 @@ export function ProfilesDataTable({
         });
         await emit("stored-proxies-changed");
         await new Promise((r) => setTimeout(r, 300));
-        const updatedProxies = await invoke<StoredProxy[]>("get_stored_proxies");
+        const updatedProxies =
+          await invoke<StoredProxy[]>("get_stored_proxies");
         const newProxy = updatedProxies.find((p) => p.name === proxyName);
         if (newProxy) {
           await invoke("assign_proxy_to_profile", {
@@ -2522,7 +2533,9 @@ export function ProfilesDataTable({
                             onSelect={() => void meta.loadPpServers()}
                           >
                             <span className="mr-2 h-4 w-4">🔑</span>
-                            {meta.ppServers.length === 0 ? "Load servers..." : `${meta.ppServers.length} servers available`}
+                            {meta.ppServers.length === 0
+                              ? "Load servers..."
+                              : `${meta.ppServers.length} servers available`}
                           </CommandItem>
                           {meta.ppServers.map((srv) => (
                             <CommandItem
@@ -2536,8 +2549,8 @@ export function ProfilesDataTable({
                                 )
                               }
                             >
-                              <span className="mr-2 h-4 w-4" />
-                              + {srv.flag} {srv.name}
+                              <span className="mr-2 h-4 w-4" />+ {srv.flag}{" "}
+                              {srv.name}
                             </CommandItem>
                           ))}
                         </CommandGroup>
