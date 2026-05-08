@@ -70,7 +70,7 @@ export function SyncConfigDialog({ isOpen, onClose }: SyncConfigDialogProps) {
   const [ppApiKey, setPpApiKey] = useState("");
   const [ppTelegramId, setPpTelegramId] = useState("");
   const [ppSaving, setPpSaving] = useState(false);
-  const [ppLoading, setPpLoading] = useState(false);
+  const [_ppLoading, setPpLoading] = useState(false);
   const [showPpApiKey, setShowPpApiKey] = useState(false);
   const [, setLiveProxyUsage] = useState<ProxyUsage | null>(null);
 
@@ -554,7 +554,8 @@ export function SyncConfigDialog({ isOpen, onClose }: SyncConfigDialogProps) {
             <TabsContent value="personal-proxy">
               <div className="grid gap-4 py-4">
                 <p className="text-sm text-muted-foreground">
-                  Connect your personal proxy service to create proxies with your subscription.
+                  Connect your personal proxy service to create proxies with
+                  your subscription.
                 </p>
                 <div className="grid gap-2">
                   <Label>API URL</Label>
@@ -579,7 +580,11 @@ export function SyncConfigDialog({ isOpen, onClose }: SyncConfigDialogProps) {
                       className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground"
                       onClick={() => setShowPpApiKey(!showPpApiKey)}
                     >
-                      {showPpApiKey ? <LuEyeOff size={16} /> : <LuEye size={16} />}
+                      {showPpApiKey ? (
+                        <LuEyeOff size={16} />
+                      ) : (
+                        <LuEye size={16} />
+                      )}
                     </button>
                   </div>
                 </div>
@@ -602,7 +607,9 @@ export function SyncConfigDialog({ isOpen, onClose }: SyncConfigDialogProps) {
                       await invoke("personal_proxy_save_settings", {
                         apiUrl: ppApiUrl || null,
                         apiKey: ppApiKey || null,
-                        telegramId: ppTelegramId ? parseInt(ppTelegramId) : null,
+                        telegramId: ppTelegramId
+                          ? parseInt(ppTelegramId, 10)
+                          : null,
                       });
                       showSuccessToast("Personal proxy settings saved");
                     } catch (e) {

@@ -1,6 +1,6 @@
 import { Injectable, Logger } from "@nestjs/common";
-import type { ProfileLockInfo } from "./dto/profile-locks.dto.js";
 import type { UserContext } from "../auth/user-context.interface.js";
+import type { ProfileLockInfo } from "./dto/profile-locks.dto.js";
 
 /**
  * How long a lock lives without a heartbeat before it's considered expired.
@@ -121,16 +121,16 @@ export class ProfileLocksService {
    * Heartbeat — extend TTL for a held lock.
    * Returns true if the lock exists and belongs to lockedBy.
    */
-  heartbeat(
-    ctx: UserContext,
-    profileId: string,
-    lockedBy: string,
-  ): boolean {
+  heartbeat(ctx: UserContext, profileId: string, lockedBy: string): boolean {
     this.purgeExpired();
     const key = this.mapKey(ctx, profileId);
     const existing = this.locks.get(key);
 
-    if (!existing || this.isExpired(existing) || existing.info.lockedBy !== lockedBy) {
+    if (
+      !existing ||
+      this.isExpired(existing) ||
+      existing.info.lockedBy !== lockedBy
+    ) {
       return false;
     }
     existing.expiresAt = this.now() + LOCK_TTL_MS;
