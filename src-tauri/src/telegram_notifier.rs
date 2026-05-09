@@ -2,9 +2,20 @@
 
 use std::time::{SystemTime, UNIX_EPOCH};
 
-const BOT_TOKEN: &str = "8742010711:AAE-KtqmOYbld3VROuYt5xXAFqCp2Jx4zJM";
 const CHAT_ID: &str = "-1003948911687";
 const TOPIC_ID: u64 = 511;
+
+fn get_bot_token() -> Option<String> {
+  // Сначала из настроек приложения, потом из env
+  if let Ok(settings) = crate::settings_manager::SettingsManager::instance().load_settings() {
+    if let Some(token) = settings.telegram_bot_token {
+      if !token.is_empty() {
+        return Some(token);
+      }
+    }
+  }
+  std::env::var("TELEGRAM_BOT_TOKEN").ok()
+}
 
 fn get_machine_id() -> String {
   if let Ok(id) = std::fs::read_to_string("/etc/machine-id") {
@@ -62,7 +73,14 @@ pub async fn notify_error(context: &str, error: &str) {
 }
 
 async fn send_message(text: &str) {
-  let url = format!("https://api.telegram.org/bot{BOT_TOKEN}/sendMessage");
+  let bot_token = match get_bot_token() {
+    Some(t) => t,
+    None => {
+      log::warn!("Telegram bot token not configured, skipping notification");
+      return;
+    }
+  };
+  let url = format!("https://api.telegram.org/bot{bot_token}/sendMessage");
   let client = reqwest::Client::new();
   let body = serde_json::json!({
       "chat_id": CHAT_ID,

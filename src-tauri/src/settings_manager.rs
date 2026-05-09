@@ -63,6 +63,10 @@ pub struct AppSettings {
   pub personal_proxy_api_key: Option<String>, // API key for personal proxy bot
   #[serde(default)]
   pub personal_proxy_telegram_id: Option<i64>, // Telegram ID for personal proxy access
+  #[serde(default)]
+  pub telegram_bot_token: Option<String>, // Telegram bot token for notifications
+  #[serde(default)]
+  pub proxy_folder_path: Option<String>, // Path to public proxy folder
 }
 
 #[derive(Debug, Serialize, Deserialize, Clone, Default)]
@@ -101,6 +105,8 @@ impl Default for AppSettings {
       personal_proxy_api_url: None,
       personal_proxy_api_key: None,
       personal_proxy_telegram_id: None,
+      telegram_bot_token: None,
+      proxy_folder_path: None,
     }
   }
 }

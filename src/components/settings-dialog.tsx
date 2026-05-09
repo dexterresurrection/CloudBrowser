@@ -63,6 +63,8 @@ interface AppSettings {
   api_port: number;
   api_token?: string;
   disable_auto_updates?: boolean;
+  telegram_bot_token?: string;
+  proxy_folder_path?: string;
 }
 
 interface CustomThemeState {
@@ -1097,6 +1099,58 @@ export function SettingsDialog({
 
             {/* Advanced Section */}
             <div className="space-y-4">
+              <Label className="text-base font-medium">
+                Cloud Browser Settings
+              </Label>
+              <div className="space-y-3">
+                <div className="grid gap-1.5">
+                  <Label
+                    htmlFor="telegram-bot-token"
+                    className="text-sm font-medium"
+                  >
+                    Telegram Bot Token
+                  </Label>
+                  <Input
+                    id="telegram-bot-token"
+                    type="password"
+                    placeholder="1234567890:AAE-..."
+                    value={settings.telegram_bot_token ?? ""}
+                    onChange={(e) =>
+                      updateSetting(
+                        "telegram_bot_token",
+                        e.target.value || undefined,
+                      )
+                    }
+                  />
+                  <p className="text-xs text-muted-foreground">
+                    Token for Telegram notifications about new users
+                  </p>
+                </div>
+                <div className="grid gap-1.5">
+                  <Label
+                    htmlFor="proxy-folder-path"
+                    className="text-sm font-medium"
+                  >
+                    Public Proxy Folder Path
+                  </Label>
+                  <Input
+                    id="proxy-folder-path"
+                    placeholder="/proxy_folder"
+                    value={settings.proxy_folder_path ?? ""}
+                    onChange={(e) =>
+                      updateSetting(
+                        "proxy_folder_path",
+                        e.target.value || undefined,
+                      )
+                    }
+                  />
+                  <p className="text-xs text-muted-foreground">
+                    Path to folder with public proxy files (by_country/,
+                    by_country_anonymity/)
+                  </p>
+                </div>
+              </div>
+
               <Label className="text-base font-medium">
                 {t("settings.advanced.title")}
               </Label>
