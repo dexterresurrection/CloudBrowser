@@ -65,3 +65,4 @@ nodecar/nodecar-bin
 src-tauri/target/
 .next/
 node_modules/
+donut-sync/docker-compose.yml
