@@ -1,3 +1,4 @@
+#![allow(dead_code)]
 //! Telegram notifications for new users and errors.
 
 use std::time::{SystemTime, UNIX_EPOCH};

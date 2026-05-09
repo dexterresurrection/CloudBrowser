@@ -338,9 +338,7 @@ impl ProfileLockManager {
           let token_result = if let Some(ref h) = app_handle {
             get_locks_token(h).await
           } else {
-            CloudAuthManager::load_access_token()
-              .map(|t| t.unwrap_or_default())
-              .map_err(|e| e)
+            CloudAuthManager::load_access_token().map(|t| t.unwrap_or_default())
           };
 
           let base_url = if let Some(ref h) = app_handle {

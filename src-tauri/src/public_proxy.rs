@@ -36,7 +36,7 @@ fn read_proxy_lines(path: &Path) -> Vec<String> {
   };
   BufReader::new(file)
     .lines()
-    .filter_map(|l| l.ok())
+    .map_while(Result::ok)
     .map(|l| l.trim().to_string())
     .filter(|l| is_valid_proxy_line(l))
     .collect()
@@ -306,6 +306,7 @@ pub fn cloud_get_regions(country: String) -> Result<Vec<LocationItem>, String> {
 }
 
 #[tauri::command]
+#[allow(unused_variables)]
 pub fn cloud_get_cities(
   country: String,
   region: Option<String>,
@@ -314,6 +315,7 @@ pub fn cloud_get_cities(
 }
 
 #[tauri::command]
+#[allow(unused_variables)]
 pub fn cloud_get_isps(
   country: String,
   region: Option<String>,
@@ -327,7 +329,7 @@ pub fn create_cloud_location_proxy(
   app_handle: tauri::AppHandle,
   name: String,
   country: String,
-  region: Option<String>,
+  _region: Option<String>,
   city: Option<String>,
   isp: Option<String>,
 ) -> Result<crate::proxy_manager::StoredProxy, String> {
