@@ -66,3 +66,4 @@ src-tauri/target/
 .next/
 node_modules/
 donut-sync/docker-compose.yml
+donut-sync/.env.production
