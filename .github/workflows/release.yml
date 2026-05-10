@@ -180,6 +180,7 @@ jobs:
 
       - name: Import Apple certificate
         if: matrix.platform == 'macos-latest'
+        continue-on-error: true
         env:
           APPLE_CERTIFICATE: ${{ secrets.APPLE_CERTIFICATE }}
           APPLE_CERTIFICATE_KEY: ${{ secrets.APPLE_CERTIFICATE_KEY }}
