@@ -2,9 +2,9 @@
 
 ## Reporting Security Issues
 
-Thanks for helping make Donut Browser safe for everyone! ❤️
+Thanks for helping make Cloud Browser safe for everyone! ❤️
 
-I take the security of Donut Browser seriously. If you believe you have found a security vulnerability in Donut Browser, please report it to me through coordinated disclosure.
+I take the security of Cloud Browser seriously. If you believe you have found a security vulnerability in Cloud Browser, please report it to me through coordinated disclosure.
 
 **Please do not report security vulnerabilities through public GitHub issues, discussions, or pull requests.**
 

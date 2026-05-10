@@ -911,7 +911,7 @@ export function SettingsDialog({
                 )}
 
                 <p className="text-xs text-muted-foreground">
-                  These permissions allow browsers launched from Donut Browser
+                  These permissions allow browsers launched from Cloud Browser
                   to access system resources. Each website will still ask for
                   your permission individually.
                 </p>
@@ -1200,7 +1200,7 @@ export function SettingsDialog({
             {systemInfo && (
               <div className="pt-2 border-t">
                 <p className="text-xs text-muted-foreground font-mono whitespace-pre-line select-all">
-                  {`Donut Browser ${systemInfo.app_version}\n${systemInfo.os} ${systemInfo.arch}${systemInfo.portable ? " (portable)" : ""}`}
+                  {`Cloud Browser ${systemInfo.app_version}\n${systemInfo.os} ${systemInfo.arch}${systemInfo.portable ? " (portable)" : ""}`}
                 </p>
               </div>
             )}

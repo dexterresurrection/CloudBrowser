@@ -1,7 +1,7 @@
 /*!
 # App Auto Updater
 
-This module provides comprehensive self-update functionality for the Donut Browser application
+This module provides comprehensive self-update functionality for the Cloud Browser application
 across multiple operating systems and installation methods.
 
 ## Supported Platforms
@@ -944,18 +944,18 @@ impl AppAutoUpdater {
       // Clean up backup after successful installation
       let _ = fs::remove_dir_all(&backup_path);
 
-      // Clean up old "Donut Browser.app" if it exists (from before the project rename)
+      // Clean up old "Cloud Browser.app" if it exists (from before the project rename)
       if let Some(parent_dir) = current_app_path.parent() {
-        let old_app_path = parent_dir.join("Donut Browser.app");
+        let old_app_path = parent_dir.join("Cloud Browser.app");
         if old_app_path.exists() && old_app_path != current_app_path {
           log::info!(
-            "Removing old 'Donut Browser.app' from: {}",
+            "Removing old 'Cloud Browser.app' from: {}",
             old_app_path.display()
           );
           if let Err(e) = fs::remove_dir_all(&old_app_path) {
-            log::warn!("Warning: Failed to remove old 'Donut Browser.app': {e}");
+            log::warn!("Warning: Failed to remove old 'Cloud Browser.app': {e}");
           } else {
-            log::info!("Successfully removed old 'Donut Browser.app'");
+            log::info!("Successfully removed old 'Cloud Browser.app'");
           }
         }
       }

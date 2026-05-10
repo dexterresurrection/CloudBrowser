@@ -1,4 +1,4 @@
-# Contributing to Donut Browser
+# Contributing to Cloud Browser
 
 Contributions are welcome! To start working on an issue, leave a comment indicating you're taking it on.
 

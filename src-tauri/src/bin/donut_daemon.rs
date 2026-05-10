@@ -1,4 +1,4 @@
-// Donut Browser Daemon - Background process for tray icon and services
+// Cloud Browser Daemon - Background process for tray icon and services
 // This runs independently of the main Tauri GUI
 
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
@@ -421,7 +421,7 @@ fn show_status() {
 }
 
 fn print_usage() {
-  eprintln!("Donut Browser Daemon");
+  eprintln!("Cloud Browser Daemon");
   eprintln!();
   eprintln!("Usage: donut-daemon <command>");
   eprintln!();

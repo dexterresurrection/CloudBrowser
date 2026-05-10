@@ -172,7 +172,7 @@ pub async fn personal_proxy_create(
   let config: PersonalProxyConfig =
     serde_json::from_str(&body).map_err(|e| format!("Parse error: {e}"))?;
 
-  // Добавить прокси в Donut Browser
+  // Добавить прокси в Cloud Browser
   let proxy_name = format!("Personal: {}", config.display_name);
   let proxy_settings = ProxySettings {
     proxy_type: "socks5".to_string(),

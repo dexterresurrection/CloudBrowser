@@ -35,7 +35,7 @@ impl TrayMenu {
   pub fn new() -> Self {
     let menu = Menu::new();
 
-    let quit_item = MenuItem::new("Quit Donut Browser", true, None);
+    let quit_item = MenuItem::new("Quit Cloud Browser", true, None);
 
     menu.append(&quit_item).unwrap();
 
@@ -46,7 +46,7 @@ impl TrayMenu {
 pub fn create_tray_icon(icon: Icon, menu: &Menu) -> TrayIcon {
   let builder = TrayIconBuilder::new()
     .with_icon(icon)
-    .with_tooltip("Donut Browser")
+    .with_tooltip("Cloud Browser")
     .with_menu(Box::new(menu.clone()));
 
   // On macOS, template icons are automatically colored by the system for light/dark mode
@@ -82,14 +82,19 @@ pub fn open_gui() {
     // activation machinery. The single-instance Tauri plugin in the GUI
     // handles deduplication if a GUI instance is already running.
     if let Some(app_bundle) = get_app_bundle_path() {
-      let gui_binary = app_bundle.join("Contents").join("MacOS").join("Donut");
+      let gui_binary = app_bundle
+        .join("Contents")
+        .join("MacOS")
+        .join("Cloud Browser");
       if gui_binary.exists() {
         let _ = Command::new(&gui_binary).spawn();
       } else {
         let _ = Command::new("open").args(["-n"]).arg(&app_bundle).spawn();
       }
     } else {
-      let _ = Command::new("open").args(["-n", "-a", "Donut"]).spawn();
+      let _ = Command::new("open")
+        .args(["-n", "-a", "Cloud Browser"])
+        .spawn();
     }
   }
 
@@ -108,9 +113,9 @@ pub fn open_gui() {
     }
 
     let paths = [
-      dirs::data_local_dir().map(|p| p.join("Donut Browser").join("Donut Browser.exe")),
+      dirs::data_local_dir().map(|p| p.join("Cloud Browser").join("Cloud Browser.exe")),
       Some(PathBuf::from(
-        "C:\\Program Files\\Donut Browser\\Donut Browser.exe",
+        "C:\\Program Files\\Cloud Browser\\Cloud Browser.exe",
       )),
     ];
 

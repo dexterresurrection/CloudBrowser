@@ -516,10 +516,10 @@ async fn add_mcp_to_claude_desktop(app_handle: tauri::AppHandle) -> Result<(), S
   let manifest = serde_json::json!({
     "manifest_version": "0.3",
     "name": "donut-browser",
-    "display_name": "Donut Browser",
+    "display_name": "Cloud Browser",
     "version": env!("CARGO_PKG_VERSION"),
-    "description": "Control Donut Browser profiles, proxies, and automation via MCP",
-    "author": { "name": "Donut Browser" },
+    "description": "Control Cloud Browser profiles, proxies, and automation via MCP",
+    "author": { "name": "Cloud Browser" },
     "tools_generated": true,
     "server": {
       "type": "node",
@@ -1234,7 +1234,7 @@ pub fn run() {
       // Create the main window programmatically
       #[allow(unused_variables)]
       let win_builder = WebviewWindowBuilder::new(app, "main", WebviewUrl::default())
-        .title("Donut Browser")
+        .title("Cloud Browser")
         .inner_size(840.0, 500.0)
         .resizable(false)
         .fullscreen(false)

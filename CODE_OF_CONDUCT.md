@@ -1,6 +1,6 @@
 # Code of Conduct
 
-All participants of the Donut Browser project (referred to as "the project") are expected to abide by this Code of Conduct, both online and during in-person events that are hosted and/or associated with the project.
+All participants of the Cloud Browser project (referred to as "the project") are expected to abide by this Code of Conduct, both online and during in-person events that are hosted and/or associated with the project.
 
 ## The Pledge
 

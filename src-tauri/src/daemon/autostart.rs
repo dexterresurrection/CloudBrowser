@@ -17,8 +17,8 @@ fn get_daemon_path() -> Option<PathBuf> {
   #[cfg(target_os = "macos")]
   {
     let paths = [
-      PathBuf::from("/Applications/Donut Browser.app/Contents/MacOS/donut-daemon"),
-      dirs::home_dir()?.join("Applications/Donut Browser.app/Contents/MacOS/donut-daemon"),
+      PathBuf::from("/Applications/Cloud Browser.app/Contents/MacOS/donut-daemon"),
+      dirs::home_dir()?.join("Applications/Cloud Browser.app/Contents/MacOS/donut-daemon"),
     ];
     for path in paths {
       if path.exists() {
@@ -30,8 +30,8 @@ fn get_daemon_path() -> Option<PathBuf> {
   #[cfg(target_os = "windows")]
   {
     let paths = [
-      dirs::data_local_dir()?.join("Donut Browser/donut-daemon.exe"),
-      PathBuf::from("C:\\Program Files\\Donut Browser\\donut-daemon.exe"),
+      dirs::data_local_dir()?.join("Cloud Browser/donut-daemon.exe"),
+      PathBuf::from("C:\\Program Files\\Cloud Browser\\donut-daemon.exe"),
     ];
     for path in paths {
       if path.exists() {
@@ -79,7 +79,7 @@ pub fn enable_autostart() -> io::Result<()> {
 
   fs::create_dir_all(&plist_dir)?;
 
-  let plist_path = plist_dir.join("com.donutbrowser.daemon.plist");
+  let plist_path = plist_dir.join("com.cloudbrowser.daemon.plist");
 
   // Get log directory (use data directory instead of /tmp)
   let log_dir = get_data_dir()
@@ -93,7 +93,7 @@ pub fn enable_autostart() -> io::Result<()> {
 <plist version="1.0">
 <dict>
     <key>Label</key>
-    <string>com.donutbrowser.daemon</string>
+    <string>com.cloudbrowser.daemon</string>
     <key>ProgramArguments</key>
     <array>
         <string>{daemon_path}</string>
@@ -124,7 +124,7 @@ pub fn enable_autostart() -> io::Result<()> {
 
 #[cfg(target_os = "macos")]
 pub fn get_plist_path() -> Option<PathBuf> {
-  dirs::home_dir().map(|h| h.join("Library/LaunchAgents/com.donutbrowser.daemon.plist"))
+  dirs::home_dir().map(|h| h.join("Library/LaunchAgents/com.cloudbrowser.daemon.plist"))
 }
 
 #[cfg(target_os = "macos")]
@@ -188,7 +188,7 @@ pub fn start_launch_agent() -> io::Result<()> {
   use std::process::Command;
 
   let output = Command::new("launchctl")
-    .args(["start", "com.donutbrowser.daemon"])
+    .args(["start", "com.cloudbrowser.daemon"])
     .output()?;
 
   if !output.status.success() {
@@ -254,7 +254,7 @@ pub fn enable_autostart() -> io::Result<()> {
   let desktop_content = format!(
     r#"[Desktop Entry]
 Type=Application
-Name=Donut Browser Daemon
+Name=Cloud Browser Daemon
 Exec="{escaped_daemon_path}" run
 Hidden=false
 NoDisplay=true
@@ -343,7 +343,7 @@ pub fn get_data_dir() -> Option<PathBuf> {
   if crate::app_dirs::is_portable() {
     return Some(crate::app_dirs::data_dir());
   }
-  if let Some(proj_dirs) = ProjectDirs::from("com", "donutbrowser", "Donut Browser") {
+  if let Some(proj_dirs) = ProjectDirs::from("com", "donutbrowser", "Cloud Browser") {
     Some(proj_dirs.data_dir().to_path_buf())
   } else {
     dirs::home_dir().map(|h| h.join(".donutbrowser"))

@@ -124,12 +124,12 @@
       "title": "Navigateur par défaut",
       "setAsDefault": "Définir comme navigateur par défaut",
       "alreadyDefault": "Déjà le navigateur par défaut",
-      "description": "Lorsqu'il est défini par défaut, Donut Browser gérera les liens web et vous permettra de choisir quel profil utiliser."
+      "description": "Lorsqu'il est défini par défaut, Cloud Browser gérera les liens web et vous permettra de choisir quel profil utiliser."
     },
     "permissions": {
       "title": "Permissions système",
       "loading": "Chargement des permissions...",
-      "description": "Ces permissions permettent aux navigateurs lancés depuis Donut Browser d'accéder aux ressources système. Chaque site web demandera toujours votre permission individuellement.",
+      "description": "Ces permissions permettent aux navigateurs lancés depuis Cloud Browser d'accéder aux ressources système. Chaque site web demandera toujours votre permission individuellement.",
       "microphone": "Microphone",
       "microphoneDescription": "Accès au microphone pour les applications du navigateur",
       "camera": "Caméra",
@@ -172,7 +172,7 @@
       "clearCacheFailed": "Échec de la suppression du cache"
     },
     "disableAutoUpdates": "Désactiver les mises à jour automatiques de l'app",
-    "disableAutoUpdatesDescription": "Empêche l'application de vérifier et d'installer automatiquement les mises à jour de Donut Browser. Les mises à jour des navigateurs ne sont pas affectées."
+    "disableAutoUpdatesDescription": "Empêche l'application de vérifier et d'installer automatiquement les mises à jour de Cloud Browser. Les mises à jour des navigateurs ne sont pas affectées."
   },
   "header": {
     "searchPlaceholder": "Rechercher des profils...",
@@ -1070,7 +1070,7 @@
     "launchHook": {
       "title": "URL du hook de lancement",
       "label": "URL du hook de lancement",
-      "description": "Donut Browser enverra une requête POST à cette URL chaque fois que le profil est lancé.",
+      "description": "Cloud Browser enverra une requête POST à cette URL chaque fois que le profil est lancé.",
       "placeholder": "https://example.com/hooks/profile-launch"
     },
     "actions": {
@@ -1412,7 +1412,7 @@
   },
   "wayfernTerms": {
     "title": "Conditions générales de Wayfern",
-    "description": "Avant d'utiliser Donut Browser, vous devez lire et accepter les Conditions Générales de Wayfern.",
+    "description": "Avant d'utiliser Cloud Browser, vous devez lire et accepter les Conditions Générales de Wayfern.",
     "reviewLabel": "Veuillez consulter les Conditions Générales sur :",
     "agreeNotice": "En cliquant sur « J'accepte », vous acceptez ces conditions.",
     "acceptButton": "J'accepte",
@@ -1423,7 +1423,7 @@
   "commercialTrial": {
     "title": "Période d'essai commerciale expirée",
     "description": "Votre période d'essai commercial de 2 semaines est terminée.",
-    "body": "Si vous utilisez Donut Browser à des fins professionnelles, vous devez acheter une licence commerciale pour continuer. Vous pouvez toujours l'utiliser gratuitement à des fins personnelles.",
+    "body": "Si vous utilisez Cloud Browser à des fins professionnelles, vous devez acheter une licence commerciale pour continuer. Vous pouvez toujours l'utiliser gratuitement à des fins personnelles.",
     "understandButton": "J'ai compris",
     "failed": "Échec de l'enregistrement de la confirmation",
     "tryAgain": "Veuillez réessayer"
@@ -1431,10 +1431,10 @@
   "permissionDialog": {
     "titleMicrophone": "Accès au microphone requis",
     "titleCamera": "Accès à la caméra requis",
-    "descMicrophone": "Donut Browser a besoin d'accéder à votre microphone pour activer la fonctionnalité microphone dans les navigateurs. Chaque site web qui voudra utiliser votre microphone vous demandera quand même votre permission individuellement.",
-    "descCamera": "Donut Browser a besoin d'accéder à votre caméra pour activer la fonctionnalité caméra dans les navigateurs. Chaque site web qui voudra utiliser votre caméra vous demandera quand même votre permission individuellement.",
-    "grantedMicrophone": "Permission accordée ! Les navigateurs lancés depuis Donut Browser peuvent maintenant accéder à votre microphone.",
-    "grantedCamera": "Permission accordée ! Les navigateurs lancés depuis Donut Browser peuvent maintenant accéder à votre caméra.",
+    "descMicrophone": "Cloud Browser a besoin d'accéder à votre microphone pour activer la fonctionnalité microphone dans les navigateurs. Chaque site web qui voudra utiliser votre microphone vous demandera quand même votre permission individuellement.",
+    "descCamera": "Cloud Browser a besoin d'accéder à votre caméra pour activer la fonctionnalité caméra dans les navigateurs. Chaque site web qui voudra utiliser votre caméra vous demandera quand même votre permission individuellement.",
+    "grantedMicrophone": "Permission accordée ! Les navigateurs lancés depuis Cloud Browser peuvent maintenant accéder à votre microphone.",
+    "grantedCamera": "Permission accordée ! Les navigateurs lancés depuis Cloud Browser peuvent maintenant accéder à votre caméra.",
     "notGrantedMicrophone": "Permission non accordée. Cliquez sur le bouton pour demander l'accès à votre microphone.",
     "notGrantedCamera": "Permission non accordée. Cliquez sur le bouton pour demander l'accès à votre caméra.",
     "doneButton": "Terminé",
@@ -1543,7 +1543,7 @@
   },
   "appUpdate": {
     "toast": {
-      "updateFailed": "Échec de la mise à jour de Donut Browser",
+      "updateFailed": "Échec de la mise à jour de Cloud Browser",
       "restartFailed": "Échec du redémarrage",
       "updateReady": "Mise à jour prête, redémarrer pour appliquer",
       "manualDownloadRequired": "Téléchargement manuel requis",

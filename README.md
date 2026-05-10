@@ -1,6 +1,6 @@
 <div align="center">
-  <img src="assets/logo.png" alt="Donut Browser Logo" width="150">
-  <h1>Donut Browser</h1>
+  <img src="assets/logo.png" alt="Cloud Browser Logo" width="150">
+  <h1>Cloud Browser</h1>
   <strong>Open Source Anti-Detect Browser</strong>
   <br>
   <a href="https://donutbrowser.com">donutbrowser.com</a>
@@ -27,7 +27,7 @@
   </a>
 </p>
 
-<img alt="Donut Browser Preview" src="assets/donut-preview.png" />
+<img alt="Cloud Browser Preview" src="assets/donut-preview.png" />
 
 ## Features
 
@@ -99,7 +99,7 @@ nix run github:zhom/donutbrowser#release-start
 
 ## Self-Hosting Sync
 
-Donut Browser supports syncing profiles, proxies, and groups across devices via a self-hosted sync server. See the [Self-Hosting Guide](docs/self-hosting-donut-sync.md) for Docker-based setup instructions.
+Cloud Browser supports syncing profiles, proxies, and groups across devices via a self-hosted sync server. See the [Self-Hosting Guide](docs/self-hosting-donut-sync.md) for Docker-based setup instructions.
 
 ## Development
 
