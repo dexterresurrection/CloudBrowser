@@ -1088,6 +1088,8 @@ mod tests {
       personal_proxy_api_url: None,
       personal_proxy_api_key: None,
       personal_proxy_telegram_id: None,
+      telegram_bot_token: None,
+      proxy_folder_path: None,
     };
 
     let save_result = manager.save_settings(&test_settings);
