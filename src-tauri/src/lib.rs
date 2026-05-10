@@ -2132,6 +2132,8 @@ mod tests {
       "generate_sample_fingerprint",
       "cloud_get_wayfern_token",
       "cloud_refresh_wayfern_token",
+      "personal_proxy_get_list",
+      "personal_proxy_delete",
     ];
 
     // Extract command names from the generate_handler! macro in this file
