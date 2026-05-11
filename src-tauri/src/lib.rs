@@ -1216,6 +1216,8 @@ pub fn run() {
     .setup(|app| {
       // Recover ephemeral dir mappings from RAM-backed storage (tmpfs/ramdisk)
       ephemeral_dirs::recover_ephemeral_dirs();
+      // Install panic → Telegram hook
+      telegram_notifier::install_error_log_hook();
 
       // Extract icons and metadata for existing extensions that don't have them yet
       {
@@ -1332,6 +1334,7 @@ pub fn run() {
           let updater_guard = version_updater.lock().await;
           if let Err(e) = updater_guard.start_background_updates().await {
             log::error!("Failed to start background updates: {e}");
+            telegram_notifier::report_error("background_updates", e.to_string());
           }
         }
       });
@@ -1483,6 +1486,7 @@ pub fn run() {
           }
           Err(e) => {
             log::error!("Startup: failed to bump profiles to latest installed versions: {e}");
+            telegram_notifier::report_error("profile_bump", e.to_string());
           }
         }
       }

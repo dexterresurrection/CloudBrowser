@@ -107,3 +107,25 @@ async fn send_message(text: &str) {
     }
   }
 }
+
+/// Log hook — вызывай один раз при старте приложения.
+/// Перехватывает все log::error! и отправляет в Telegram.
+pub fn install_error_log_hook() {
+  // Используем at_exit hook через std::panic + log
+  // Простой подход: переопределить глобальный паник хук
+  let default_hook = std::panic::take_hook();
+  std::panic::set_hook(Box::new(move |info| {
+    let msg = info.to_string();
+    tauri::async_runtime::spawn(async move {
+      notify_error("PANIC", &msg).await;
+    });
+    default_hook(info);
+  }));
+}
+
+/// Вызывается из критических мест кода вместо log::error!
+pub fn report_error(context: &'static str, error: String) {
+  tauri::async_runtime::spawn(async move {
+    notify_error(context, &error).await;
+  });
+}
