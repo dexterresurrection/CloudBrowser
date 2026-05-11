@@ -221,6 +221,7 @@ jobs:
           APPLE_ID: ${{ secrets.APPLE_ID }}
           APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
           APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          CI: true
           # tauri-action invokes `pnpm tauri build`, which runs
           # `beforeBuildCommand` from tauri.conf.json. That rebuilds the
           # frontend in its own subprocess, so the env var MUST be forwarded
@@ -230,7 +231,7 @@ jobs:
         with:
           projectPath: ./src-tauri
           tagName: ${{ github.ref_name }}
-          releaseName: "Donut Browser ${{ github.ref_name }}"
+          releaseName: "Cloud Browser ${{ github.ref_name }}"
           releaseBody: "See the assets to download this version and install."
           releaseDraft: false
           prerelease: false
