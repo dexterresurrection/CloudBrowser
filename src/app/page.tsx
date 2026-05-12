@@ -988,7 +988,8 @@ export default function Home() {
           label: "Learn more",
           onClick: () => {
             const event = new CustomEvent("url-open-request", {
-              detail: "https://github.com/zhom/donutbrowser/discussions",
+              detail:
+                "https://github.com/dexterresurrection/CloudBrowser/discussions",
             });
             window.dispatchEvent(event);
           },

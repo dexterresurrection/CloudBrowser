@@ -207,7 +207,7 @@ impl AppAutoUpdater {
 
       // Build the release page URL
       let release_page_url = format!(
-        "https://github.com/zhom/donutbrowser/releases/tag/{}",
+        "https://github.com/dexterresurrection/CloudBrowser/releases/tag/{}",
         latest_release.tag_name
       );
 
@@ -278,7 +278,7 @@ impl AppAutoUpdater {
   async fn fetch_app_releases(
     &self,
   ) -> Result<Vec<AppRelease>, Box<dyn std::error::Error + Send + Sync>> {
-    let url = "https://api.github.com/repos/zhom/donutbrowser/releases?per_page=100";
+    let url = "https://api.github.com/repos/dexterresurrection/CloudBrowser/releases?per_page=100";
     let response = self
       .client
       .get(url)
@@ -464,14 +464,14 @@ impl AppAutoUpdater {
   /// Check if the APT repository is configured
   #[cfg(target_os = "linux")]
   fn is_deb_repo_configured() -> bool {
-    Path::new("/etc/apt/sources.list.d/donutbrowser.list").exists()
+    Path::new("/etc/apt/sources.list.d/cloudbrowser.list").exists()
   }
 
   /// Check if an RPM repository is configured (yum/dnf or zypper)
   #[cfg(target_os = "linux")]
   fn is_rpm_repo_configured() -> bool {
-    Path::new("/etc/yum.repos.d/donutbrowser.repo").exists()
-      || Path::new("/etc/zypp/repos.d/donutbrowser.repo").exists()
+    Path::new("/etc/yum.repos.d/cloudbrowser.repo").exists()
+      || Path::new("/etc/zypp/repos.d/cloudbrowser.repo").exists()
   }
 
   /// Check if a system package manager repo is configured for this installation.

@@ -563,33 +563,7 @@ export function CreateProfileDialog({
                     <TabsContent value="anti-detect" className="mt-0 space-y-6">
                       {/* Anti-Detect Browser Selection */}
                       <div className="space-y-3 pt-8">
-                        {/* Wayfern (Chromium) - First */}
-                        <Button
-                          onClick={() => {
-                            handleBrowserSelect("wayfern");
-                          }}
-                          className="flex gap-3 justify-start items-center p-4 w-full h-16 border-2 transition-colors hover:border-primary/50"
-                          variant="outline"
-                        >
-                          <div className="flex justify-center items-center w-8 h-8">
-                            {(() => {
-                              const IconComponent = getBrowserIcon("wayfern");
-                              return IconComponent ? (
-                                <IconComponent className="w-6 h-6" />
-                              ) : null;
-                            })()}
-                          </div>
-                          <div className="text-left">
-                            <div className="font-medium">
-                              {t("createProfile.chromiumLabel")}
-                            </div>
-                            <div className="text-sm text-muted-foreground">
-                              {t("createProfile.chromiumSubtitle")}
-                            </div>
-                          </div>
-                        </Button>
-
-                        {/* Camoufox (Firefox) - Second */}
+                        {/* Camoufox (Firefox)  */}
                         <Button
                           onClick={() => {
                             handleBrowserSelect("camoufox");
