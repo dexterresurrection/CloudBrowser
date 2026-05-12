@@ -11,7 +11,6 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { WayfernConfigForm } from "@/components/wayfern-config-form";
 import type {
   BrowserProfile,
   CamoufoxConfig,
@@ -35,10 +34,6 @@ interface CamoufoxConfigDialogProps {
   onClose: () => void;
   profile: BrowserProfile | null;
   onSave: (profile: BrowserProfile, config: CamoufoxConfig) => Promise<void>;
-  onSaveWayfern?: (
-    profile: BrowserProfile,
-    config: CamoufoxConfig,
-  ) => Promise<void>;
   isRunning?: boolean;
   crossOsUnlocked?: boolean;
 }
@@ -48,28 +43,22 @@ export function CamoufoxConfigDialog({
   onClose,
   profile,
   onSave,
-  onSaveWayfern,
   isRunning = false,
   crossOsUnlocked = false,
 }: CamoufoxConfigDialogProps) {
   const { t } = useTranslation();
-  // Use union type to support both Camoufox and Wayfern configs
-  const [config, setConfig] = useState<CamoufoxConfig | WayfernConfig>(() => ({
+  const [config, setConfig] = useState<CamoufoxConfig>(() => ({
     geoip: true,
     os: getCurrentOS(),
   }));
   const [isSaving, setIsSaving] = useState(false);
 
-  const isAntiDetectBrowser =
-    profile?.browser === "camoufox" || profile?.browser === "wayfern";
+  const isAntiDetectBrowser = profile?.browser === "camoufox";
 
   // Initialize config when profile changes
   useEffect(() => {
     if (profile && isAntiDetectBrowser) {
-      const profileConfig =
-        profile.browser === "wayfern"
-          ? profile.wayfern_config
-          : profile.camoufox_config;
+      const profileConfig = profile.camoufox_config;
       setConfig(
         profileConfig || {
           geoip: true,
@@ -79,7 +68,7 @@ export function CamoufoxConfigDialog({
     }
   }, [profile, isAntiDetectBrowser]);
 
-  const updateConfig = (
+  const _updateConfig = (
     key: keyof CamoufoxConfig | keyof WayfernConfig,
     value: unknown,
   ) => {
@@ -104,11 +93,7 @@ export function CamoufoxConfigDialog({
 
     setIsSaving(true);
     try {
-      if (profile.browser === "wayfern" && onSaveWayfern) {
-        await onSaveWayfern(profile, config as CamoufoxConfig);
-      } else {
-        await onSave(profile, config as CamoufoxConfig);
-      }
+      await onSave(profile, config as CamoufoxConfig);
       onClose();
     } catch (error) {
       console.error("Failed to save config:", error);
@@ -127,10 +112,7 @@ export function CamoufoxConfigDialog({
   const handleClose = () => {
     // Reset config to original when closing without saving
     if (profile && isAntiDetectBrowser) {
-      const profileConfig =
-        profile.browser === "wayfern"
-          ? profile.wayfern_config
-          : profile.camoufox_config;
+      const profileConfig = profile.camoufox_config;
       setConfig(
         profileConfig || {
           geoip: true,
@@ -145,7 +127,7 @@ export function CamoufoxConfigDialog({
     return null;
   }
 
-  const browserName = profile.browser === "wayfern" ? "Wayfern" : "Camoufox";
+  const browserName = "Camoufox";
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
@@ -166,30 +148,17 @@ export function CamoufoxConfigDialog({
 
         <ScrollArea className="flex-1 h-[300px]">
           <div className="py-4">
-            {profile.browser === "wayfern" ? (
-              <WayfernConfigForm
-                config={config as WayfernConfig}
-                onConfigChange={updateConfig}
-                forceAdvanced={true}
-                readOnly={isRunning}
-                crossOsUnlocked={crossOsUnlocked}
-                limitedMode={!crossOsUnlocked}
-                profileVersion={profile.version}
-                profileBrowser="wayfern"
-              />
-            ) : (
-              <SharedCamoufoxConfigForm
-                config={config as CamoufoxConfig}
-                onConfigChange={updateConfig}
-                forceAdvanced={true}
-                readOnly={isRunning}
-                browserType="camoufox"
-                crossOsUnlocked={crossOsUnlocked}
-                limitedMode={!crossOsUnlocked}
-                profileVersion={profile.version}
-                profileBrowser="camoufox"
-              />
-            )}
+            <SharedCamoufoxConfigForm
+              config={config as CamoufoxConfig}
+              onConfigChange={_updateConfig}
+              forceAdvanced={true}
+              readOnly={isRunning}
+              browserType="camoufox"
+              crossOsUnlocked={crossOsUnlocked}
+              limitedMode={!crossOsUnlocked}
+              profileVersion={profile.version}
+              profileBrowser="camoufox"
+            />
           </div>
         </ScrollArea>
 

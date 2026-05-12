@@ -26,17 +26,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { WayfernConfigForm } from "@/components/wayfern-config-form";
 import { useBrowserSupport } from "@/hooks/use-browser-support";
 import { useProxyEvents } from "@/hooks/use-proxy-events";
 import { getBrowserDisplayName, getBrowserIcon } from "@/lib/browser-utils";
-import type { CamoufoxConfig, DetectedProfile, WayfernConfig } from "@/types";
+import type { CamoufoxConfig, DetectedProfile } from "@/types";
 import { RippleButton } from "./ui/ripple";
 
-const getMappedBrowser = (browser: string): "camoufox" | "wayfern" => {
+const getMappedBrowser = (browser: string): "camoufox" => {
   if (["firefox", "firefox-developer", "zen"].includes(browser))
     return "camoufox";
-  return "wayfern";
+  return "camoufox";
 };
 
 interface ImportProfileDialogProps {
@@ -63,7 +62,6 @@ export function ImportProfileDialog({
     "select",
   );
   const [camoufoxConfig, setCamoufoxConfig] = useState<CamoufoxConfig>({});
-  const [wayfernConfig, setWayfernConfig] = useState<WayfernConfig>({});
   const [selectedProxyId, setSelectedProxyId] = useState<string | undefined>();
 
   // Auto-detect state
@@ -168,7 +166,7 @@ export function ImportProfileDialog({
 
     const mappedBrowser =
       importMode === "auto-detect" && selectedProfile
-        ? (selectedProfile.mapped_browser as "camoufox" | "wayfern")
+        ? (selectedProfile.mapped_browser as "camoufox")
         : getMappedBrowser(browserType);
 
     setIsImporting(true);
@@ -179,7 +177,7 @@ export function ImportProfileDialog({
         newProfileName,
         proxyId: selectedProxyId ?? null,
         camoufoxConfig: mappedBrowser === "camoufox" ? camoufoxConfig : null,
-        wayfernConfig: mappedBrowser === "wayfern" ? wayfernConfig : null,
+        wayfernConfig: null,
       });
 
       toast.success(
@@ -215,7 +213,6 @@ export function ImportProfileDialog({
     manualProfileName,
     selectedProxyId,
     camoufoxConfig,
-    wayfernConfig,
     onClose,
     selectedProfile,
     t,
@@ -224,7 +221,6 @@ export function ImportProfileDialog({
   const handleClose = () => {
     setCurrentStep("select");
     setCamoufoxConfig({});
-    setWayfernConfig({});
     setSelectedProxyId(undefined);
     setSelectedDetectedProfile(null);
     setAutoDetectProfileName("");
@@ -254,10 +250,10 @@ export function ImportProfileDialog({
 
   const currentMappedBrowser = useMemo(() => {
     if (importMode === "auto-detect" && selectedProfile) {
-      return selectedProfile.mapped_browser as "camoufox" | "wayfern";
+      return selectedProfile.mapped_browser as "camoufox";
     }
     if (importMode === "manual" && manualBrowserType) {
-      return manualBrowserType as "camoufox" | "wayfern";
+      return manualBrowserType as "camoufox";
     }
     return null;
   }, [importMode, selectedProfile, manualBrowserType]);
@@ -575,21 +571,11 @@ export function ImportProfileDialog({
                 </Select>
               </div>
 
-              {currentMappedBrowser === "camoufox" ? (
+              {currentMappedBrowser === "camoufox" && (
                 <SharedCamoufoxConfigForm
                   config={camoufoxConfig}
                   onConfigChange={(key, value) => {
                     setCamoufoxConfig((prev) => ({ ...prev, [key]: value }));
-                  }}
-                  isCreating={true}
-                  crossOsUnlocked={crossOsUnlocked}
-                  limitedMode={!crossOsUnlocked}
-                />
-              ) : (
-                <WayfernConfigForm
-                  config={wayfernConfig}
-                  onConfigChange={(key, value) => {
-                    setWayfernConfig((prev) => ({ ...prev, [key]: value }));
                   }}
                   isCreating={true}
                   crossOsUnlocked={crossOsUnlocked}

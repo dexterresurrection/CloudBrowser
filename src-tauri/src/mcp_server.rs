@@ -130,12 +130,6 @@ impl McpServer {
   }
 
   pub async fn start(&self, app_handle: AppHandle) -> Result<u16, String> {
-    if !WayfernTermsManager::instance().is_terms_accepted() {
-      return Err(
-        "Wayfern Terms and Conditions must be accepted before starting MCP server".to_string(),
-      );
-    }
-
     if self.is_running() {
       return Err("MCP server is already running".to_string());
     }

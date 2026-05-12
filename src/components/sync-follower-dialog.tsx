@@ -65,7 +65,6 @@ export function SyncFollowerDialog({
   const eligibleProfiles = allProfiles.filter(
     (p) =>
       p.id !== leaderProfile?.id &&
-      p.browser === "wayfern" &&
       !runningProfiles.has(p.id) &&
       !isCrossOsProfile(p),
   );
@@ -141,7 +140,7 @@ export function SyncFollowerDialog({
                 <div className="space-y-1 p-2">
                   {eligibleProfiles.length === 0 ? (
                     <p className="text-sm text-muted-foreground py-4 text-center">
-                      {t("profiles.synchronizer.wayfernOnly")}
+                      {t("profiles.synchronizer.description")}
                     </p>
                   ) : (
                     eligibleProfiles.map((profile) => {

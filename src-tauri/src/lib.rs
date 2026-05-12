@@ -1897,13 +1897,6 @@ pub fn run() {
             log::warn!("Failed to refresh cloud sync token on startup: {e}");
           }
           cloud_auth::CLOUD_AUTH.sync_cloud_proxy().await;
-
-          // Request wayfern token on startup for paid users
-          if cloud_auth::CLOUD_AUTH.is_logged_in().await {
-            if let Err(e) = cloud_auth::CLOUD_AUTH.request_wayfern_token().await {
-              log::warn!("Failed to request wayfern token on startup: {e}");
-            }
-          }
         }
         cloud_auth::CloudAuthManager::start_sync_token_refresh_loop(app_handle_cloud).await;
       });

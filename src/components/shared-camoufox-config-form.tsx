@@ -32,7 +32,7 @@ interface SharedCamoufoxConfigFormProps {
   isCreating?: boolean; // Flag to indicate if this is for creating a new profile
   forceAdvanced?: boolean; // Force advanced mode (for editing)
   readOnly?: boolean; // Flag to indicate if the form should be read-only
-  browserType?: "camoufox" | "wayfern"; // Browser type to customize form options
+  browserType?: "camoufox"; // Browser type to customize form options
   crossOsUnlocked?: boolean; // Allow selecting non-current OS (paid feature)
   limitedMode?: boolean; // Blur and disable advanced fields while keeping basic options accessible
   profileVersion?: string;

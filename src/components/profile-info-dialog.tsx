@@ -175,8 +175,7 @@ export function ProfileInfoDialog({
   if (!profile) return null;
 
   const ProfileIcon = getProfileIcon(profile);
-  const isCamoufoxOrWayfern =
-    profile.browser === "camoufox" || profile.browser === "wayfern";
+  const isCamoufoxOrWayfern = profile.browser === "camoufox";
   const isDeleteDisabled = isRunning;
 
   const proxyName = profile.proxy_id
@@ -284,7 +283,7 @@ export function ProfileInfoDialog({
       },
       disabled: isDisabled || isRunning || !crossOsUnlocked,
       proBadge: !crossOsUnlocked,
-      hidden: profile.browser !== "wayfern" || !onLaunchWithSync,
+      hidden: true,
     },
     {
       icon: <LuCopy className="w-4 h-4" />,

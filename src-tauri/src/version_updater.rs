@@ -256,7 +256,7 @@ impl VersionUpdater {
 
     // Only fetch versions for active browsers (wayfern, camoufox) plus any
     // deprecated browsers that still have existing profiles
-    let active_browsers = ["wayfern", "camoufox"];
+    let active_browsers = ["camoufox"];
     let browsers_with_profiles: std::collections::HashSet<String> =
       crate::profile::ProfileManager::instance()
         .list_profiles()
