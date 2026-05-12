@@ -15,7 +15,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useWayfernTerms } from "@/hooks/use-wayfern-terms";
 import { showErrorToast, showSuccessToast } from "@/lib/toast-utils";
 import { CopyToClipboard } from "./ui/copy-to-clipboard";
 
@@ -60,8 +59,6 @@ export function IntegrationsDialog({
   const [isMcpStarting, setIsMcpStarting] = useState(false);
   const [mcpInClaudeDesktop, setMcpInClaudeDesktop] = useState(false);
   const [mcpInClaudeCode, setMcpInClaudeCode] = useState(false);
-
-  const { termsAccepted } = useWayfernTerms();
 
   const loadSettings = useCallback(async () => {
     try {
@@ -375,7 +372,7 @@ export function IntegrationsDialog({
                 <Checkbox
                   id="mcp-enabled"
                   checked={settings.mcp_enabled && mcpConfig !== null}
-                  disabled={!termsAccepted || isMcpStarting}
+                  disabled={isMcpStarting}
                   onCheckedChange={(checked) => void handleMcpToggle(!!checked)}
                 />
                 <div className="grid gap-1.5 leading-none">
@@ -387,11 +384,6 @@ export function IntegrationsDialog({
                   </Label>
                   <p className="text-xs text-muted-foreground">
                     {t("integrations.mcpEnableDescription")}
-                    {!termsAccepted && (
-                      <span className="ml-1 text-warning">
-                        {t("integrations.mcpAcceptTermsFirst")}
-                      </span>
-                    )}
                   </p>
                 </div>
               </div>

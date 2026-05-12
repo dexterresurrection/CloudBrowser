@@ -31,7 +31,6 @@ import { SettingsDialog } from "@/components/settings-dialog";
 import { SyncAllDialog } from "@/components/sync-all-dialog";
 import { SyncConfigDialog } from "@/components/sync-config-dialog";
 import { SyncFollowerDialog } from "@/components/sync-follower-dialog";
-import { WayfernTermsDialog } from "@/components/wayfern-terms-dialog";
 import { WindowResizeWarningDialog } from "@/components/window-resize-warning-dialog";
 import { useAppUpdateNotifications } from "@/hooks/use-app-update-notifications";
 import { useCloudAuth } from "@/hooks/use-cloud-auth";
@@ -45,7 +44,6 @@ import { useSyncSessions } from "@/hooks/use-sync-session";
 import { useUpdateNotifications } from "@/hooks/use-update-notifications";
 import { useVersionUpdater } from "@/hooks/use-version-updater";
 import { useVpnEvents } from "@/hooks/use-vpn-events";
-import { useWayfernTerms } from "@/hooks/use-wayfern-terms";
 import {
   dismissToast,
   showErrorToast,
@@ -99,12 +97,7 @@ export default function Home() {
   const [syncLeaderProfile, setSyncLeaderProfile] =
     useState<BrowserProfile | null>(null);
 
-  // Wayfern terms and commercial trial hooks
-  const {
-    termsAccepted,
-    isLoading: termsLoading,
-    checkTerms,
-  } = useWayfernTerms();
+  // Commercial trial hook
   const {
     trialStatus,
     hasAcknowledged: trialAcknowledged,
@@ -1006,7 +999,7 @@ export default function Home() {
         "download-progress",
         (event) => {
           if (event.payload.stage === "completed") {
-            void checkTerms();
+            // download completed
           }
         },
       );
@@ -1015,7 +1008,7 @@ export default function Home() {
     return () => {
       if (unlisten) unlisten();
     };
-  }, [checkTerms]);
+  }, []);
 
   // Check permissions when they are initialized
   useEffect(() => {
@@ -1335,17 +1328,9 @@ export default function Home() {
         }}
       />
 
-      {/* Wayfern Terms and Conditions Dialog - shown if terms not accepted */}
-      <WayfernTermsDialog
-        isOpen={!termsLoading && termsAccepted === false}
-        onAccepted={checkTerms}
-      />
-
       {/* Commercial Trial Modal - shown once when trial expires (skip for paid users) */}
       <CommercialTrialModal
         isOpen={
-          !termsLoading &&
-          termsAccepted === true &&
           trialStatus?.type === "Expired" &&
           !trialAcknowledged &&
           !crossOsUnlocked
