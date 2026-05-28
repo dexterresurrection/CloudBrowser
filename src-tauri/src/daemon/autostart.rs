@@ -301,7 +301,7 @@ pub fn enable_autostart() -> io::Result<()> {
   let (key, _) = hkcu.create_subkey("Software\\Microsoft\\Windows\\CurrentVersion\\Run")?;
 
   key.set_value(
-    "DonutBrowserDaemon",
+    "CloudBrowserDaemon",
     &format!("\"{}\" run", daemon_path.display()),
   )?;
 
@@ -319,7 +319,7 @@ pub fn disable_autostart() -> io::Result<()> {
     "Software\\Microsoft\\Windows\\CurrentVersion\\Run",
     winreg::enums::KEY_WRITE,
   ) {
-    let _ = key.delete_value("DonutBrowserDaemon");
+    let _ = key.delete_value("CloudBrowserDaemon");
     log::info!("Removed registry autostart entry");
   }
 
@@ -333,7 +333,7 @@ pub fn is_autostart_enabled() -> bool {
 
   let hkcu = RegKey::predef(HKEY_CURRENT_USER);
   if let Ok(key) = hkcu.open_subkey("Software\\Microsoft\\Windows\\CurrentVersion\\Run") {
-    key.get_value::<String, _>("DonutBrowserDaemon").is_ok()
+    key.get_value::<String, _>("CloudBrowserDaemon").is_ok()
   } else {
     false
   }

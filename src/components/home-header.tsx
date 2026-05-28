@@ -31,7 +31,7 @@ const BOUNCE_DAMPING = 0.6;
 const INITIAL_HORIZONTAL_SPEED = 350;
 const SPIN_SPEED = 720;
 const MIN_BOUNCE_VELOCITY = 60;
-const LOGO_HIDDEN_KEY = "donut-logo-hidden";
+const LOGO_HIDDEN_KEY = "cloudbrowser-logo-hidden";
 
 function useLogoEasterEgg() {
   const clickTimestamps = useRef<number[]>([]);
@@ -236,7 +236,7 @@ const HomeHeader = ({
         ) : (
           <div className="p-1 w-10 h-10" />
         )}
-        <CardTitle>Donut</CardTitle>
+        <CardTitle>Cloud Browser</CardTitle>
       </div>
       <div className="flex gap-2 items-center">
         <div className="relative">

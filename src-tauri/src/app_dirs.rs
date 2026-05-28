@@ -28,9 +28,9 @@ pub fn is_portable() -> bool {
 
 pub fn app_name() -> &'static str {
   if cfg!(debug_assertions) {
-    "DonutBrowserDev"
+    "CloudBrowserDev"
   } else {
-    "DonutBrowser"
+    "CloudBrowser"
   }
 }
 
@@ -159,8 +159,8 @@ mod tests {
   fn test_app_name() {
     let name = app_name();
     assert!(
-      name == "DonutBrowser" || name == "DonutBrowserDev",
-      "app_name should be DonutBrowser or DonutBrowserDev, got: {name}"
+      name == "CloudBrowser" || name == "CloudBrowserDev",
+      "app_name should be CloudBrowser or CloudBrowserDev, got: {name}"
     );
   }
 

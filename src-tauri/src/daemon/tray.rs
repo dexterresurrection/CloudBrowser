@@ -184,7 +184,7 @@ pub fn quit_gui() {
     // Use spawn() instead of output() to avoid blocking the event loop.
     // AppleScript has a ~2 minute default timeout that would freeze the tray icon.
     let _ = Command::new("osascript")
-      .args(["-e", "tell application \"Donut\" to quit"])
+      .args(["-e", "tell application \"Cloud Browser\" to quit"])
       .spawn();
   }
 
@@ -193,7 +193,7 @@ pub fn quit_gui() {
     use std::os::windows::process::CommandExt;
     const CREATE_NO_WINDOW: u32 = 0x08000000;
     let _ = Command::new("taskkill")
-      .args(["/IM", "Donut.exe", "/F"])
+      .args(["/IM", "CloudBrowser.exe", "/F"])
       .creation_flags(CREATE_NO_WINDOW)
       .spawn();
     let _ = Command::new("taskkill")

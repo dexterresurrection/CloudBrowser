@@ -27,7 +27,7 @@ import { useCloudAuth } from "@/hooks/use-cloud-auth";
 import { showErrorToast, showSuccessToast } from "@/lib/toast-utils";
 import type { SyncSettings } from "@/types";
 
-const DEVICE_LINK_URL = "https://donutbrowser.com/auth/link";
+const DEVICE_LINK_URL = "https://cloudbrowser.chocobo.fun/auth/link";
 
 interface SyncConfigDialogProps {
   isOpen: boolean;
@@ -347,7 +347,7 @@ export function SyncConfigDialog({ isOpen, onClose }: SyncConfigDialogProps) {
             <div className="flex gap-2 pt-2">
               <Button variant="outline" className="flex-1" asChild>
                 <a
-                  href="https://donutbrowser.com/account"
+                  href="https://cloudbrowser.chocobo.fun/account"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

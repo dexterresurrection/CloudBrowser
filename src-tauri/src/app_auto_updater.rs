@@ -1879,18 +1879,18 @@ mod tests {
     let all_assets = vec![
       // macOS assets
       AppReleaseAsset {
-        name: "Donut.Browser_0.1.0_aarch64.dmg".to_string(),
+        name: "Cloud.Browser_0.1.0_aarch64.dmg".to_string(),
         browser_download_url: "https://example.com/aarch64.dmg".to_string(),
         size: 12345,
       },
       AppReleaseAsset {
-        name: "Donut.Browser_0.1.0_x64.dmg".to_string(),
+        name: "Cloud.Browser_0.1.0_x64.dmg".to_string(),
         browser_download_url: "https://example.com/x64.dmg".to_string(),
         size: 12345,
       },
       // Windows assets (NSIS naming: _ARCH-setup.exe)
       AppReleaseAsset {
-        name: "Donut_0.1.0_x64-setup.exe".to_string(),
+        name: "CloudBrowser_0.1.0_x64-setup.exe".to_string(),
         browser_download_url: "https://example.com/x64-setup.exe".to_string(),
         size: 12345,
       },
@@ -1906,7 +1906,7 @@ mod tests {
         size: 12345,
       },
       AppReleaseAsset {
-        name: "Donut.Browser-0.1.0-x86_64.AppImage".to_string(),
+        name: "Cloud.Browser-0.1.0-x86_64.AppImage".to_string(),
         browser_download_url: "https://example.com/x86_64.AppImage".to_string(),
         size: 12345,
       },
@@ -2013,7 +2013,7 @@ mod tests {
         size: 12345,
       },
       AppReleaseAsset {
-        name: "Donut.Browser-0.1.0-x86_64.AppImage".to_string(),
+        name: "Cloud.Browser-0.1.0-x86_64.AppImage".to_string(),
         browser_download_url: "https://example.com/x86_64.AppImage".to_string(),
         size: 12345,
       },
@@ -2053,13 +2053,13 @@ mod tests {
     let all_assets = vec![
       // macOS assets
       AppReleaseAsset {
-        name: "Donut.Browser_0.1.0_aarch64.dmg".to_string(),
+        name: "Cloud.Browser_0.1.0_aarch64.dmg".to_string(),
         browser_download_url: "https://example.com/aarch64.dmg".to_string(),
         size: 12345,
       },
       // Windows assets
       AppReleaseAsset {
-        name: "Donut.Browser_0.1.0_x64.msi".to_string(),
+        name: "Cloud.Browser_0.1.0_x64.msi".to_string(),
         browser_download_url: "https://example.com/x64.msi".to_string(),
         size: 12345,
       },
@@ -2070,7 +2070,7 @@ mod tests {
         size: 12345,
       },
       AppReleaseAsset {
-        name: "Donut.Browser-0.1.0-x86_64.AppImage".to_string(),
+        name: "Cloud.Browser-0.1.0-x86_64.AppImage".to_string(),
         browser_download_url: "https://example.com/x86_64.AppImage".to_string(),
         size: 12345,
       },

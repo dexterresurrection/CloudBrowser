@@ -3,12 +3,7 @@
  * Centralized helpers for browser name mapping, icons, etc.
  */
 
-import {
-  FaChrome,
-  FaExclamationTriangle,
-  FaFire,
-  FaFirefox,
-} from "react-icons/fa";
+import { FaExclamationTriangle, FaFire, FaFirefox } from "react-icons/fa";
 
 /**
  * Map internal browser names to display names
