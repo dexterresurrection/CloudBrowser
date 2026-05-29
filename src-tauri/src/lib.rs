@@ -72,7 +72,6 @@ use profile::manager::{
   list_browser_profiles, rename_profile, update_camoufox_config, update_profile_dns_blocklist,
   update_profile_launch_hook, update_profile_note, update_profile_proxy,
   update_profile_proxy_bypass_rules, update_profile_tags, update_profile_vpn,
-  update_wayfern_config,
 };
 
 use browser_version_manager::{
@@ -82,8 +81,7 @@ use browser_version_manager::{
 };
 
 use downloaded_browsers_registry::{
-  check_missing_binaries, ensure_active_browsers_downloaded, ensure_all_binaries_exist,
-  get_downloaded_browser_versions,
+  check_missing_binaries, ensure_all_binaries_exist, get_downloaded_browser_versions,
 };
 
 use downloader::{cancel_download, download_browser};

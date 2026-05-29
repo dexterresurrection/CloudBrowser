@@ -1058,6 +1058,7 @@ impl ProfileManager {
     Ok(())
   }
 
+  #[allow(dead_code)]
   pub async fn update_wayfern_config(
     &self,
     app_handle: tauri::AppHandle,
@@ -2292,6 +2293,7 @@ pub async fn update_camoufox_config(
 }
 
 #[tauri::command]
+#[allow(dead_code)]
 pub async fn update_wayfern_config(
   app_handle: tauri::AppHandle,
   profile_id: String,

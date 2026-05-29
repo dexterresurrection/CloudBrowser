@@ -1237,6 +1237,7 @@ mod tests {
 }
 
 #[tauri::command]
+#[allow(dead_code)]
 pub async fn ensure_active_browsers_downloaded(
   app_handle: tauri::AppHandle,
 ) -> Result<Vec<String>, String> {
