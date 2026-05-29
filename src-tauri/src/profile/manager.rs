@@ -1879,8 +1879,9 @@ mod tests {
     let profiles_dir = manager.get_profiles_dir();
 
     assert!(
-      profiles_dir.to_string_lossy().contains("DonutBrowser"),
-      "Profiles dir should contain DonutBrowser"
+      profiles_dir.to_string_lossy().contains("CloudBrowser")
+        || profiles_dir.to_string_lossy().contains("com.cloudbrowser"),
+      "Profiles dir should contain CloudBrowser"
     );
     assert!(
       profiles_dir.to_string_lossy().contains("profiles"),
@@ -1915,8 +1916,8 @@ mod tests {
     let path_str = binaries_dir.to_string_lossy();
 
     assert!(
-      path_str.contains("DonutBrowser"),
-      "Binaries dir should contain DonutBrowser"
+      path_str.contains("CloudBrowser") || path_str.contains("com.cloudbrowser"),
+      "Binaries dir should contain CloudBrowser"
     );
     assert!(
       path_str.contains("binaries"),
