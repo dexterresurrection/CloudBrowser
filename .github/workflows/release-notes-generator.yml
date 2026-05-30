@@ -82,7 +82,7 @@ jobs:
       - name: Generate release notes with AI
         id: generate-notes
         if: steps.get-release.outputs.is-prerelease == 'false'
-        uses: actions/ai-inference@e09e65981758de8b2fdab13c2bfb7c7d5493b0b6 # v2.0.7
+        uses: actions/ai-inference@a7805884c80886efc241e94a5351df715968a0ad # v2.1.1
         with:
           prompt-file: .github/prompts/release-notes.prompt.yml
           input: |
