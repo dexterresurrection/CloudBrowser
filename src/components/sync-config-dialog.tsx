@@ -29,7 +29,7 @@ import type { SyncSettings } from "@/types";
 
 const _BOT_API_URL = "https://apibot.chocobo.fun";
 const _BOT_API_KEY =
-  "REDACTED_API_KEY";
+  "Rqzd5vV6JRiSYeXGlLH2rMEcw0ECth0tERpsSI0YHGa_CKYiPPslRcjrbnIC4OUm";
 
 interface SyncConfigDialogProps {
   isOpen: boolean;
