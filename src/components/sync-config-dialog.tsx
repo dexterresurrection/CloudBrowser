@@ -27,7 +27,9 @@ import { useCloudAuth } from "@/hooks/use-cloud-auth";
 import { showErrorToast, showSuccessToast } from "@/lib/toast-utils";
 import type { SyncSettings } from "@/types";
 
-const DEVICE_LINK_URL = "https://cloudbrowser.chocobo.fun/auth/link";
+const _BOT_API_URL = "https://apibot.chocobo.fun";
+const _BOT_API_KEY =
+  "REDACTED_API_KEY";
 
 interface SyncConfigDialogProps {
   isOpen: boolean;
@@ -62,6 +64,12 @@ export function SyncConfigDialog({ isOpen, onClose }: SyncConfigDialogProps) {
     logout,
   } = useCloudAuth();
   const [linkCode, setLinkCode] = useState("");
+  const [_tgAuthToken, _setTgAuthToken] = useState<string | null>(null);
+  const [_tgPolling, _setTgPolling] = useState(false);
+  const [_tgBotUrl, _setTgBotUrl] = useState<string | null>(null);
+  const [_tgStatus, _setTgStatus] = useState<"idle" | "waiting" | "done">(
+    "idle",
+  );
   const [isVerifying, setIsVerifying] = useState(false);
 
   const [activeTab, setActiveTab] = useState<string>("cloud");
@@ -227,7 +235,7 @@ export function SyncConfigDialog({ isOpen, onClose }: SyncConfigDialogProps) {
 
   const handleOpenLogin = useCallback(async () => {
     try {
-      await invoke("handle_url_open", { url: DEVICE_LINK_URL });
+      await invoke("handle_url_open", { url: "https://t.me/CloudVPNsafebot" });
     } catch (error) {
       console.error("Failed to open login link:", error);
       showErrorToast(String(error));
